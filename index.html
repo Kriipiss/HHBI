@@ -379,7 +379,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ЗЕЛЁНОЕ ОКНО УСПЕХА */
         .success-box {
             display: none;
             background: linear-gradient(135deg, #4CAF50, #66BB6A);
@@ -489,16 +488,16 @@
                 <i class="fa-solid fa-camera-retro"></i> Немного фото
             </div>
             <div class="photo-grid">
-                <div class="photo-frame"><img src="my/assets/img/1.jpg" alt="Фото 1" ...>
-<div class="photo-frame"><img src="my/assets/img/2.jpg" alt="Фото 2" ...>
-<div class="photo-frame"><img src="my/assets/img/3.jpg" alt="Фото 3" ...>
-<div class="photo-frame"><img src="my/assets/img/4.jpg" alt="Фото 4" ...>
+                <div class="photo-frame"><img src="my/assets/img/1.jpg" alt="Фото 1" onerror="this.src='https://via.placeholder.com/300/ffccdd/ffffff?text=Photo+1'"></div>
+                <div class="photo-frame"><img src="my/assets/img/2.jpg" alt="Фото 2" onerror="this.src='https://via.placeholder.com/300/ff99bb/ffffff?text=Photo+2'"></div>
+                <div class="photo-frame"><img src="my/assets/img/3.jpg" alt="Фото 3" onerror="this.src='https://via.placeholder.com/300/ffccdd/ffffff?text=Photo+3'"></div>
+                <div class="photo-frame"><img src="my/assets/img/4.jpg" alt="Фото 4" onerror="this.src='https://via.placeholder.com/300/ff99bb/ffffff?text=Photo+4'"></div>
             </div>
         </div>
 
         <div class="rsvp-card fade-in">
             <h2><i class="fa-regular fa-envelope"></i> Пожалуйста, ответь!</h2>
-            <p style="margin-bottom: 20px;">Бунду очень рада видеть тебя!</p>
+            <p style="margin-bottom: 20px;">Буду очень рада видеть тебя!</p>
             
             <form id="rsvpForm" action="https://formspree.io/f/xvkozong" method="POST">
                 <input type="hidden" name="_subject" value="Новый ответ на приглашение!">
@@ -517,35 +516,33 @@
                     <label for="attendance">Сможешь прийти?</label>
                     <select id="attendance" name="attendance" class="form-control" required>
                         <option value="">Выбери вариант...</option>
-                        <option value="yes"> ☺ Да, обязательно буду!</option>
-                        <option value="no"> ☹ К сожалению, нет</option>
-                        <option value="maybe"> ✴︎ Пока не знаю</option>
+                        <option value="yes">🎉 Да, обязательно буду!</option>
+                        <option value="no">😔 К сожалению, нет</option>
+                        <option value="maybe">🤔 Пока не знаю</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="message"> ♛ Пожелания (необязательно) ♛</label>
+                    <label for="message">Пожелания (необязательно)</label>
                     <textarea id="message" name="message" class="form-control" rows="2" placeholder="Напиши что-нибудь..."></textarea>
                 </div>
 
                 <button type="submit" class="btn-submit" id="submitBtn">Отправить <i class="fa-solid fa-paper-plane"></i></button>
             </form>
 
-            <!-- ЗЕЛЁНОЕ ОКНО УСПЕХА -->
             <div class="success-box" id="successBox">
                 <i class="fa-solid fa-circle-check"></i>
-                <h3>Молодец! </h3>
+                <h3>Молодец! 🎉</h3>
                 <p>Твой ответ успешно отправлен!<br>Жду тебя с нетерпением! 💖</p>
             </div>
         </div>
 
         <div class="footer">
-            <p> ❤ С любовью, Ваша королева комильфо ♛ ❤  <i class="fa-solid fa-crown"></i></p>
+            <p>С любовью, Ваша королева комильфо <i class="fa-solid fa-crown"></i></p>
         </div>
     </div>
 
     <script>
-        // Индикатор прокрутки
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -553,7 +550,6 @@
             document.getElementById('scrollIndicator').style.width = scrolled + '%';
         });
 
-        // Анимация появления при прокрутке
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -564,7 +560,6 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Летающие иконки
         const bg = document.getElementById('bg');
         const icons = ['fa-heart', 'fa-star', 'fa-gift', 'fa-balloon', 'fa-cake-candles'];
         
@@ -579,7 +574,6 @@
             bg.appendChild(el);
         }
 
-        // Таймер
         const targetDate = new Date('2026-09-05T18:00:00');
 
         function updateCountdown() {
@@ -606,22 +600,19 @@
         updateCountdown();
         setInterval(updateCountdown, 60000);
 
-        // Параллакс
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX / window.innerWidth;
             const mouseY = e.clientY / window.innerHeight;
             document.getElementById('bg').style.transform = `translate(${mouseX * 10}px, ${mouseY * 10}px)`;
         });
 
-        // ОТПРАВКА ФОРМЫ С ЗЕЛЁНЫМ ОКНОМ
         const form = document.getElementById('rsvpForm');
         const submitBtn = document.getElementById('submitBtn');
         const successBox = document.getElementById('successBox');
 
         form.addEventListener('submit', async function(e) {
-            e.preventDefault(); // Останавливаем стандартную отправку
+            e.preventDefault();
             
-            // Меняем текст кнопки
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Отправляем...';
             submitBtn.disabled = true;
@@ -636,11 +627,9 @@
                 });
 
                 if (response.ok) {
-                    // Скрываем форму и показываем зелёное окно
                     form.style.display = 'none';
                     successBox.classList.add('show');
                     
-                    // Через 5 секунд возвращаем форму (на случай если кто-то ещё захочет ответить)
                     setTimeout(() => {
                         successBox.classList.remove('show');
                         form.style.display = 'block';
