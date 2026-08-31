@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎉 Приглашение на День Рождения!</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-pink: #ff3399;
+            --soft-pink: #ffcce0;
+            --bg-gradient: linear-gradient(135deg, #fff0f5 0%, #ffe4e1 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #4a4a4a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .floating-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .float-item {
+            position: absolute;
+            color: rgba(255, 102, 178, 0.2);
+            animation: floatUp 15s linear infinite;
+            font-size: 2rem;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in.delay-1 { transition-delay: 0.1s; }
+        .fade-in.delay-2 { transition-delay: 0.2s; }
+        .fade-in.delay-3 { transition-delay: 0.3s; }
+        .fade-in.delay-4 { transition-delay: 0.4s; }
+
+        .main-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(255, 102, 178, 0.15);
+            text-align: center;
+            border: 2px solid white;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .main-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(255, 102, 178, 0.25);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--primary-pink);
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 
+                0 0 10px rgba(255, 51, 153, 0.5),
+                0 0 20px rgba(255, 51, 153, 0.3),
+                0 0 30px rgba(255, 51, 153, 0.2);
+            animation: glowPulse 3s ease-in-out infinite alternate;
+            cursor: default;
+            transition: transform 0.3s;
+        }
+
+        h1:hover {
+            transform: scale(1.05) rotate(-1deg);
+        }
+
+        @keyframes glowPulse {
+            from {
+                text-shadow: 
+                    0 0 10px rgba(255, 51, 153, 0.5),
+                    0 0 20px rgba(255, 51, 153, 0.3),
+                    0 0 30px rgba(255, 51, 153, 0.2);
+            }
+            to {
+                text-shadow: 
+                    0 0 15px rgba(255, 51, 153, 0.8),
+                    0 0 30px rgba(255, 51, 153, 0.6),
+                    0 0 45px rgba(255, 51, 153, 0.4);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: #ff8da1;
+            margin-bottom: 20px;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .details-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .detail-box {
+            width: 150px;
+            height: 150px;
+            background: white;
+            padding: 20px 15px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+            transition: left 0.5s;
+        }
+
+        .detail-box:hover::before { left: 100%; }
+
+        .detail-box:hover { 
+            transform: translateY(-10px) scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 35px rgba(255, 102, 178, 0.3);
+        }
+
+        .detail-box:active { transform: scale(0.95); }
+
+        .detail-icon {
+            font-size: 2.5rem;
+            color: var(--primary-pink);
+            margin-bottom: 10px;
+            transition: transform 0.3s;
+        }
+
+        .detail-box:hover .detail-icon {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .detail-label {
+            font-weight: 800;
+            color: #ff8da1;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .detail-value {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        .timer-value {
+            font-size: 1.1rem !important;
+            color: var(--primary-pink) !important;
+            font-weight: 900 !important;
+            animation: timerPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes timerPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .gallery-section { margin: 40px 0; }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            color: var(--primary-pink);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: transform 0.3s;
+            cursor: default;
+        }
+
+        .section-title:hover { transform: scale(1.1); }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        @media (min-width: 600px) {
+            .photo-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+
+        .photo-frame {
+            aspect-ratio: 1;
+            background: #ffeef8;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .photo-frame:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 102, 178, 0.3);
+            z-index: 10;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .photo-frame:hover img { transform: scale(1.2); }
+
+        .rsvp-card {
+            background: linear-gradient(135deg, #ff66b2, #ff99cc);
+            color: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(255, 102, 178, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rsvp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(255, 102, 178, 0.4);
+        }
+
+        .rsvp-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .btn-submit {
+            background: white;
+            color: var(--primary-pink);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--primary-pink);
+            font-weight: 800;
+            font-size: 1.2rem;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ЗЕЛЁНОЕ ОКНО УСПЕХА */
+        .success-box {
+            display: none;
+            background: linear-gradient(135deg, #4CAF50, #66BB6A);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+            animation: successPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .success-box.show {
+            display: block;
+        }
+
+        .success-box i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: bounce 1s ease infinite;
+        }
+
+        .success-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+        }
+
+        .success-box p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        @keyframes successPop {
+            0% { opacity: 0; transform: scale(0.5) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .main-card { padding: 25px 15px; }
+            .detail-box { width: 140px; height: 140px; }
+            .detail-icon { font-size: 2rem; }
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff66b2, #ff99cc);
+            z-index: 1000;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    <div class="floating-bg" id="bg"></div>
+
+    <div class="container">
+        <div class="main-card fade-in">
+            <h1><i class="fa-solid fa-wand-magic-sparkles"></i> ПРИГЛАШЕНИЕ!</h1>
+            <div class="subtitle">Принвент канфентка!</div>
+            
+            <p class="intro-text">
+                С радостью приглашаю тебя на мой день рождения!<br>
+                Давай отпразднуем этот особенный день вместе!
+            </p>
+
+            <div class="details-grid">
+                <div class="detail-box fade-in delay-1">
+                    <div class="detail-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <div class="detail-label">Дата</div>
+                    <div class="detail-value">05.09.26</div>
+                </div>
+                <div class="detail-box fade-in delay-2">
+                    <div class="detail-icon"><i class="fa-regular fa-clock"></i></div>
+                    <div class="detail-label">Время</div>
+                    <div class="detail-value">~18:00<br><small style="font-size: 0.75rem; color: #999;">(уточню позже)</small></div>
+                </div>
+                <div class="detail-box fade-in delay-3">
+                    <div class="detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="detail-label">Место</div>
+                    <div class="detail-value">Май Хаус<br>Мира 83</div>
+                </div>
+                <div class="detail-box fade-in delay-4">
+                    <div class="detail-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <div class="detail-label">Осталось</div>
+                    <div class="detail-value timer-value" id="countdown">Загрузка...</div>
+                </div>
+            </div>
+
+            <p style="color: #888; font-style: italic;">
+                <i class="fa-solid fa-gift"></i> Тебя ждёт много веселья и вкусное угощение!
+            </p>
+        </div>
+
+        <div class="gallery-section fade-in">
+            <div class="section-title">
+                <i class="fa-solid fa-camera-retro"></i> Немного фото
+            </div>
+            <div class="photo-grid">
+                <div class="photo-frame"><img src="assets/img/1.jpg" alt="Фото 1" onerror="this.src='https://via.placeholder.com/300/ffccdd/ffffff?text=Photo+1'"></div>
+                <div class="photo-frame"><img src="assets/img/2.jpg" alt="Фото 2" onerror="this.src='https://via.placeholder.com/300/ff99bb/ffffff?text=Photo+2'"></div>
+                <div class="photo-frame"><img src="assets/img/3.jpg" alt="Фото 3" onerror="this.src='https://via.placeholder.com/300/ffccdd/ffffff?text=Photo+3'"></div>
+                <div class="photo-frame"><img src="assets/img/4.jpg" alt="Фото 4" onerror="this.src='https://via.placeholder.com/300/ff99bb/ffffff?text=Photo+4'"></div>
+            </div>
+        </div>
+
+        <div class="rsvp-card fade-in">
+            <h2><i class="fa-regular fa-envelope"></i> Пожалуйста, ответь!</h2>
+            <p style="margin-bottom: 20px;">Бунду очень рада видеть тебя!</p>
+            
+            <form id="rsvpForm" action="https://formspree.io/f/xvkozong" method="POST">
+                <input type="hidden" name="_subject" value="Новый ответ на приглашение!">
+                
+                <div class="form-group">
+                    <label for="name">Твоё имя</label>
+                    <input type="text" id="name" name="name" class="form-control" required placeholder="Как к тебе обращаться?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Твой Email или телефон</label>
+                    <input type="text" id="contact" name="contact" class="form-control" placeholder="Для связи">
+                </div>
+
+                <div class="form-group">
+                    <label for="attendance">Сможешь прийти?</label>
+                    <select id="attendance" name="attendance" class="form-control" required>
+                        <option value="">Выбери вариант...</option>
+                        <option value="yes"> ☺ Да, обязательно буду!</option>
+                        <option value="no"> ☹ К сожалению, нет</option>
+                        <option value="maybe"> ✴︎ Пока не знаю</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message"> ♛ Пожелания (необязательно) ♛</label>
+                    <textarea id="message" name="message" class="form-control" rows="2" placeholder="Напиши что-нибудь..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit" id="submitBtn">Отправить <i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+
+            <!-- ЗЕЛЁНОЕ ОКНО УСПЕХА -->
+            <div class="success-box" id="successBox">
+                <i class="fa-solid fa-circle-check"></i>
+                <h3>Молодец! </h3>
+                <p>Твой ответ успешно отправлен!<br>Жду тебя с нетерпением! 💖</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p> ❤ С любовью, Ваша королева комильфо ♛ ❤  <i class="fa-solid fa-crown"></i></p>
+        </div>
+    </div>
+
+    <script>
+        // Индикатор прокрутки
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Анимация появления при прокрутке
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Летающие иконки
+        const bg = document.getElementById('bg');
+        const icons = ['fa-heart', 'fa-star', 'fa-gift', 'fa-balloon', 'fa-cake-candles'];
+        
+        for(let i=0; i<15; i++) {
+            const el = document.createElement('i');
+            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+            el.className = `fa-solid ${randomIcon} float-item`;
+            el.style.left = Math.random() * 100 + '%';
+            el.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            el.style.animationDelay = (Math.random() * 5) + 's';
+            el.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            bg.appendChild(el);
+        }
+
+        // Таймер
+        const targetDate = new Date('2026-09-05T18:00:00');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById('countdown').innerHTML = 'Уже сегодня! 🎉';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            let text = '';
+            if (days > 0) text += `${days} дн. `;
+            if (days > 0 || hours > 0) text += `${hours} ч. `;
+            text += `${minutes} мин.`;
+            
+            document.getElementById('countdown').innerHTML = text;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 60000);
+
+        // Параллакс
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            document.getElementById('bg').style.transform = `translate(${mouseX * 10}px, ${mouseY * 10}px)`;
+        });
+
+        // ОТПРАВКА ФОРМЫ С ЗЕЛЁНЫМ ОКНОМ
+        const form = document.getElementById('rsvpForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const successBox = document.getElementById('successBox');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault(); // Останавливаем стандартную отправку
+            
+            // Меняем текст кнопки
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Отправляем...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Скрываем форму и показываем зелёное окно
+                    form.style.display = 'none';
+                    successBox.classList.add('show');
+                    
+                    // Через 5 секунд возвращаем форму (на случай если кто-то ещё захочет ответить)
+                    setTimeout(() => {
+                        successBox.classList.remove('show');
+                        form.style.display = 'block';
+                        form.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 5000);
+                } else {
+                    throw new Error('Ошибка отправки');
+                }
+            } catch (error) {
+                alert('😔 Упс! Что-то пошло не так. Попробуй ещё раз или напиши мне лично!');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
